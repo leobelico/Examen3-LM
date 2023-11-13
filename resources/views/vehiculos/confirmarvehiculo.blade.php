@@ -44,12 +44,13 @@
                         @endif
                     </td>
                     <td>
-                        @if($vehiculo->estado == 1) {{-- Mostrar el botón solo si el vehículo no ha sido comprado --}}
-                            <form method="POST" action="{{ route('comprar-vehiculo', $vehiculo->id) }}">
-                                @csrf
-                                @method('PUT')
-                                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Comprar</button>
-                            </form>
+                        @if($vehiculo->estado == 2) 
+                        <form method="POST" action="{{ route('confirmar-vehiculos', $vehiculo->id) }}">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Confirmar venta</button>
+                    </form>
+
                         @endif
                     </td>
                 </tr>

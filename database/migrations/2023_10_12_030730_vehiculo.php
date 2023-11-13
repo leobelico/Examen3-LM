@@ -12,7 +12,7 @@ return new class extends Migration {
             $table->id();
             $table->string('nombre');
             $table->string('tipo')->nullable();
-            $table->float('capacidad')->default(0.0);
+            $table->biginteger('capacidad');
             $table->string('color');
             $table->binary('imagen_3d')->nullable();
             $table->unsignedBigInteger('usuario_id'); // Agrega esta línea para el campo usuario_id

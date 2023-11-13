@@ -11,17 +11,6 @@
                 <div class="p-6 bg-white border-b border-gray-200 dark:bg-gray-800 dark:text-gray-100">
                     <h3 class="text-lg font-semibold mb-4">Lista de Vehículos</h3>
 
-                    <!-- Agregar un menú desplegable para filtrar por tipo -->
-                    <div class="mb-4">
-                        <label for="tipo">Filtrar por Tipo:</label>
-                        <select id="tipo" name="tipo" onchange="filtrarPorTipo(this.value)">
-                            <option value="">Todos</option>
-                            @foreach($tipos as $tipo)
-                                <option value="{{ $tipo }}" {{ ($tipo == $tipoSeleccionado) ? 'selected' : '' }}>{{ $tipo }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
                     @if($vehiculos->isEmpty())
                         <p>No hay vehículos para mostrar.</p>
                     @else
@@ -48,13 +37,8 @@
                                         <td>{{ $vehiculo->precio }}</td>
                                         <td>{{ $vehiculo->estado }}</td>
                                         <td>
-                                            <a href="{{ route('vehiculos.edit', $vehiculo->id) }}" class="bg-blue-500 text-white px-4 py-2 rounded">Editar</a>
+                                        <a href="{{ route('vehiculos.subir-imagen', ['id' => $vehiculo->id]) }}" class="bg-blue-500 text-white px-4 py-2 rounded">Subir imagen</a>
                                             
-                                            <form method="POST" action="{{ route('vehiculos.destroy', $vehiculo->id) }}" style="display: inline-block">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded" onclick="return confirm('¿Estás seguro?')">Borrar</button>
-                                            </form>
                                         </td>
                                     </tr>
 
@@ -70,15 +54,7 @@
                         @endif
                     @endif
                 </div>
-                <a href="{{ route('exportar-vehiculos') }}">Exportar a Excel</a>
             </div>
         </div>
     </div>
-
-    <script>
-        function filtrarPorTipo(tipo) {
-            // Redirigir a la misma página con el parámetro de tipo seleccionado
-            window.location.href = "{{ route('ver-vehiculos') }}?tipo=" + tipo;
-        }
-    </script>
 </x-app-layout>
